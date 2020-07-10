@@ -15,39 +15,26 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines message providers for the reminder plugin.
+ * All events consumed by local reminder plugin.
  *
- * @package   local_reminders
- * @copyright 2012 Isuru Madushanka Weerarathna
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    local_reminders
+ * @copyright  2012 Isuru Madushanka Weerarathna
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
-$messageproviders = array (
+$observers = array(
 
-    // Reminders for site events.
-    'reminders_site' => array (
+    array(
+        'eventname' => '\core\event\calendar_event_updated',
+        'callback' => '\local_reminders\calendar_observer::calendar_event_updated',
     ),
-
-    // Reminders for user events.
-    'reminders_user' => array (
+    array(
+        'eventname' => '\core\event\calendar_event_created',
+        'callback' => '\local_reminders\calendar_observer::calendar_event_added'
     ),
-
-    // Reminders for course events.
-    'reminders_course' => array (
-    ),
-
-    // Reminders for course events.
-    'reminders_coursecategory' => array (
-    ),
-
-    // Reminders for group events.
-    'reminders_group' => array (
-    ),
-
-    // Reminders for due events.
-    'reminders_due' => array (
+    array(
+        'eventname' => '\core\event\calendar_event_deleted',
+        'callback' => '\local_reminders\calendar_observer::calendar_event_removed'
     )
-
 );

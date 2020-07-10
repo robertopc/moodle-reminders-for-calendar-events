@@ -17,18 +17,16 @@
 /**
  * Reminder plugin version information
  *
- * @package    local
- * @subpackage reminders
+ * @package    local_reminders
+ * @author     Isuru Weerarathna <uisurumadushanka89@gmail.com>
  * @copyright  2012 Isuru Madushanka Weerarathna
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2019060200;
-$plugin->requires  = 2018051700;        // require moodle 3.5 or higher
-$plugin->release   = '1.6';
+$plugin->version   = 2020051400;
+$plugin->requires  = 2018051700;        // Require moodle 3.5 or higher.
+$plugin->release   = '2.2.1';
 $plugin->maturity  = MATURITY_RC;
-$plugin->component = 'local_reminders'; 
-// deprecated since v3.5      
-// $plugin->cron      = 10;                  // Default: 900, will run for 15-minutes
+$plugin->component = 'local_reminders';

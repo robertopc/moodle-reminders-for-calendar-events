@@ -22,25 +22,39 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace local_reminders\task;
+
 defined('MOODLE_INTERNAL') || die();
 
-$tasks = [
-    [
-        'classname' => 'local_reminders\\task\\send_reminders',
-        'blocking' => 0,
-        'minute' => '*/15',
-        'hour' => '*',
-        'day' => '*',
-        'dayofweek' => '*',
-        'month' => '*'
-    ],
-    [
-        'classname' => 'local_reminders\\task\\clean_reminders_logs',
-        'blocking' => 0,
-        'minute' => '0',
-        'hour' => '1',
-        'day' => '*',
-        'dayofweek' => '*',
-        'month' => '*'
-    ]
-];
+global $CFG;
+
+require_once($CFG->dirroot . '/local/reminders/lib.php');
+
+/**
+ * Handler class to cron task of cleaning older reminder tables.
+ *
+ * @package    local_reminders
+ * @copyright  2012 Isuru Madushanka Weerarathna
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class clean_reminders_logs extends \core\task\scheduled_task {
+
+    /**
+     * Executes the cleaning cron task.
+     *
+     * @return void nothing.
+     */
+    public function execute() {
+        clean_local_reminders_logs();
+    }
+
+    /**
+     * Returns clean task name as 'Clean Local Reminders Logs'.
+     *
+     * @return string cleaning task name.
+     */
+    public function get_name() {
+        return get_string('reminderstaskclean', 'local_reminders');
+    }
+
+}
